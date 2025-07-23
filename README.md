@@ -127,8 +127,9 @@ path ke Python dan project sesuai
    sudo supervisorctl status flask-minimal
    ```  
 - Harusnya muncul seperti:
-  flask-minimal                RUNNING    pid 1234, uptime 0:00:10
-
+   ```bash
+   lask-minimal                RUNNING    pid 1234, uptime 0:00:10
+   ``` 
 - Kedua cara tersebut memang sama saja kegunaannya yaitu untuk membuat aplikasi Flask berjalan sebagai layanan (daemon) yang otomatis start saat booting. Tinggal menyesuaikan saja menurut kita cara mana yang lebih gampang.
 
 ## Usage
