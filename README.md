@@ -87,14 +87,22 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+   ```
+ Ganti ubuntu dan path sesuai dengan username & lokasi kamu.
 
-
-3. Install depensi yng dibutuhkan:
+3. Reload systemd dan Aktifkan Servicenya:
    ```bash
-   pip install -r requirements.txt
+   sudo systemctl daemon-reexec
+   sudo systemctl daemon-reload
+   sudo systemctl enable flask-minimal.service
    ```
 
-4. jalankan aplikasi:
+4. Lalu jalankan:
    ```bash
-   python app.py
+   sudo systemctl start flask-minimal.service
    ```
+
+5. Cek status apakah berjalan:
+   ```bash
+   sudo systemctl status flask-minimal.service
+   ```  
