@@ -128,7 +128,7 @@ path ke Python dan project sesuai
    ```  
 - Harusnya muncul seperti:
    ```bash
-   lask-minimal                RUNNING    pid 1234, uptime 0:00:10
+   flask-minimal                RUNNING    pid 1234, uptime 0:00:10
    ``` 
 - Kedua cara tersebut memang sama saja kegunaannya yaitu untuk membuat aplikasi Flask berjalan sebagai layanan (daemon) yang otomatis start saat booting. Tinggal menyesuaikan saja menurut kita cara mana yang lebih gampang.
 
