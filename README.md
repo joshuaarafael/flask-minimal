@@ -41,31 +41,10 @@ sudo apt install python3 python3-venv python3-pip -y
 
 Aplikasi Flask akan dimulai, dan Anda dapat melihatnya dengan menavigasi ke http://localhost:5000 di peramban Anda.
 
-## Usage
-
-Proyek awal ini siap digunakan sebagai fondasi untuk membangun aplikasi web. Berkas app.py berisi semua rute dan logika Flask, sehingga mudah diperluas dan disesuaikan. Anda dapat menambahkan lebih banyak templat, rute, atau berkas statis sesuai kebutuhan.
-
-## Customization
-Anda dapat dengan mudah mengubah:
-
-- Struktur HTML di `templates/index.html`
-- Gaya di `static/style.css`
-- Interaktivitas di `static/script.js`
-
-Silakan perbarui berkas app.py untuk menambahkan rute atau logika tambahan sesuai kebutuhan Anda.
-
-## License
-Proyek ini dilisensikan di bawah Lisensi MIT.
-
-## Contributing
-Jangan ragu untuk melakukan forking repositori ini dan membuat permintaan tarik jika Anda memiliki peningkatan atau perbaikan bug. Jika Anda memiliki saran, sampaikan masalah Anda, dan kami akan membahasnya!
-
-Proyek ini dibangun dengan mengutamakan kesederhanaan dan efisiensi, sempurna untuk memulai aplikasi web kecil atau prototipe dengan cepat dan dengan biaya operasional minimal.
-
 ## Problem
 Setelah anda berhasil melakukan cara diatas anda tidak dapat mengreboot mesin karena jika anda mengreboot maka anda harus mengulangi cara dari awal dan itu sangat memakan waktu. Maka dari itu terdapat beberapa cara agar Flask otomatis berjalan kembali setelah reboot EC2. Ini membuat aplikasi Flask berjalan sebagai layanan (daemon) yang otomatis start saat booting.
 
-## systemd
+## Systemd
 
 1. Buat File Service Systemd:
    ```bash
@@ -106,3 +85,72 @@ WantedBy=multi-user.target
    ```bash
    sudo systemctl status flask-minimal.service
    ```  
+
+## Supervisor
+
+1. Install Supervisor:
+   ```bash
+   sudo apt update
+   sudo apt install supervisor -y
+   ```
+
+2. Buat Konfigurasi Supervisor
+   ```bash
+   sudo nano /etc/supervisor/conf.d/flask-minimal.conf
+   ```
+
+## 3. Isi file tersebut seperti ini:
+```ini
+[program:flask-minimal]
+directory=/home/ubuntu/flask-minimal
+command=/home/ubuntu/flask-minimal/venv/bin/python3 app.py
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/flask-minimal.err.log
+stdout_logfile=/var/log/flask-minimal.out.log
+user=ubuntu
+environment=PATH="/home/ubuntu/flask-minimal/venv/bin"
+   ```
+- Pastikan:
+user=ubuntu sesuai user EC2 kamu
+path ke Python dan project sesuai
+
+4. Reload dan Start Supervisor:
+   ```bash
+   sudo supervisorctl reread
+   sudo supervisorctl update
+   sudo supervisorctl start flask-minimal
+   ```
+
+5. Cek apakah sudah jalan:
+   ```bash
+  sudo supervisorctl status flask-minimal
+   ```  
+
+- Harusnya muncul seperti:
+   ```bash
+  flask-minimal                RUNNING    pid 1234, uptime 0:00:10
+   ```  
+- Kedua cara tersebut memang sama saja kegunaannya yaitu untuk membuat aplikasi Flask berjalan sebagai layanan (daemon) yang otomatis start saat booting. Tinggal menyesuaikan saja menurut kita cara mana yang lebih gampang.
+
+## Usage
+
+Proyek awal ini siap digunakan sebagai fondasi untuk membangun aplikasi web. Berkas app.py berisi semua rute dan logika Flask, sehingga mudah diperluas dan disesuaikan. Anda dapat menambahkan lebih banyak templat, rute, atau berkas statis sesuai kebutuhan.
+
+## Customization
+Anda dapat dengan mudah mengubah:
+
+- Struktur HTML di `templates/index.html`
+- Gaya di `static/style.css`
+- Interaktivitas di `static/script.js`
+
+Silakan perbarui berkas app.py untuk menambahkan rute atau logika tambahan sesuai kebutuhan Anda.
+
+## License
+Proyek ini dilisensikan di bawah Lisensi MIT.
+
+## Contributing
+Jangan ragu untuk melakukan forking repositori ini dan membuat permintaan tarik jika Anda memiliki peningkatan atau perbaikan bug. Jika Anda memiliki saran, sampaikan masalah Anda, dan kami akan membahasnya!
+
+Proyek ini dibangun dengan mengutamakan kesederhanaan dan efisiensi, sempurna untuk memulai aplikasi web kecil atau prototipe dengan cepat dan dengan biaya operasional minimal.
+
