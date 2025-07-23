@@ -88,7 +88,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
    ```
- Ganti ubuntu dan path sesuai dengan username & lokasi kamu.
+- Ganti ubuntu dan path sesuai dengan username & lokasi kamu.
 
 3. Reload systemd dan Aktifkan Servicenya:
    ```bash
