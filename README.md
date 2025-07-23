@@ -124,7 +124,7 @@ path ke Python dan project sesuai
 
 5. Cek apakah sudah jalan:
    ```bash
-  sudo supervisorctl status flask-minimal
+   sudo supervisorctl status flask-minimal
    ```  
 - Harusnya muncul seperti:
   flask-minimal                RUNNING    pid 1234, uptime 0:00:10
