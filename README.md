@@ -72,9 +72,10 @@ Setelah anda berhasil melakukan cara diatas anda tidak dapat mengreboot mesin ka
    sudo nano /etc/systemd/system/flask-minimal.service
    ```
 
-2. Isikan ini (sesuaikan dengan path-mu!):
-   ```bash
-   [Unit]
+## 2. Isikan ini (sesuaikan dengan path-mu!):
+
+```ini
+[Unit]
 Description=Minimal Flask App
 After=network.target
 
@@ -86,8 +87,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-   ```
-   Ganti ubuntu dan path sesuai dengan username & lokasi kamu.
+
 
 3. Install depensi yng dibutuhkan:
    ```bash
