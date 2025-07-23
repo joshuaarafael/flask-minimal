@@ -62,6 +62,39 @@ Jangan ragu untuk melakukan forking repositori ini dan membuat permintaan tarik 
 
 Proyek ini dibangun dengan mengutamakan kesederhanaan dan efisiensi, sempurna untuk memulai aplikasi web kecil atau prototipe dengan cepat dan dengan biaya operasional minimal.
 
-### Permasalahan
-```Setelah anda berhasil melakukan cara diatas anda tidak dapat mengreboot mesin karena jika anda mengreboot maka anda harus mengulangi cara dari awal dan itu sangat memakan waktu. Maka dari itu terdapat beberapa cara agar Flask otomatis berjalan kembali setelah reboot EC2. Ini membuat aplikasi Flask berjalan sebagai layanan (daemon) yang otomatis start saat booting.
-```
+## Problem
+Setelah anda berhasil melakukan cara diatas anda tidak dapat mengreboot mesin karena jika anda mengreboot maka anda harus mengulangi cara dari awal dan itu sangat memakan waktu. Maka dari itu terdapat beberapa cara agar Flask otomatis berjalan kembali setelah reboot EC2. Ini membuat aplikasi Flask berjalan sebagai layanan (daemon) yang otomatis start saat booting.
+
+## systemd
+
+1. Buat File Service Systemd:
+   ```bash
+   sudo nano /etc/systemd/system/flask-minimal.service
+   ```
+
+2. Isikan ini (sesuaikan dengan path-mu!):
+   ```bash
+   [Unit]
+Description=Minimal Flask App
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/flask-minimal
+ExecStart=/home/ubuntu/flask-minimal/venv/bin/python3 /home/ubuntu/flask-minimal/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+   ```
+   Ganti ubuntu dan path sesuai dengan username & lokasi kamu.
+
+3. Install depensi yng dibutuhkan:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. jalankan aplikasi:
+   ```bash
+   python app.py
+   ```
